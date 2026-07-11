@@ -3,6 +3,6 @@
 set -ex
 
 xcodebuild -version
-xcodebuild -project AltTabX.xcodeproj -scheme Release -showBuildSettings | grep SWIFT_VERSION
+xcodebuild -project AltTabNeo.xcodeproj -scheme Release -showBuildSettings | grep SWIFT_VERSION
 
-set -o pipefail && xcodebuild test -project AltTabX.xcodeproj -scheme Test -configuration Release | scripts/xcbeautify
+set -o pipefail && xcodebuild test -project AltTabNeo.xcodeproj -scheme Test -configuration Release | scripts/xcbeautify

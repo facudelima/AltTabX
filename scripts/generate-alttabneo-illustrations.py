@@ -151,11 +151,11 @@ def draw_app_labels(draw: ImageDraw.ImageDraw, box: tuple[int, int, int, int], m
         return
     x, y, w, h = box
     if mode == "apps":
-        labels = ["Safari", "AltTabX", "Música"]
+        labels = ["Safari", "AltTabNeo", "Música"]
     elif mode == "windows":
         labels = ["Inbox", "Settings", "Playlist"]
     else:
-        labels = ["Safari — Tab", "AltTabX — Code", "Music — Jazz"]
+        labels = ["Safari — Tab", "AltTabNeo — Code", "Music — Jazz"]
     f = font(max(14, int(h * 0.08)), bold=True)
     slots = [x + int(w * 0.18), x + int(w * 0.5), x + int(w * 0.82)]
     ly = y + h + 6

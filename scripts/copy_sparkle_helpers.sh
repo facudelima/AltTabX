@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build phase script for the AltTabX target. Wired from the "Copy Sparkle Helpers"
+# Build phase script for the AltTabNeo target. Wired from the "Copy Sparkle Helpers"
 # build phase via $(SRCROOT)/scripts/copy_sparkle_helpers.sh.
 #
 # Runs after Xcode's Embed Frameworks phase, before Xcode's final code-signing of AltTab.app:

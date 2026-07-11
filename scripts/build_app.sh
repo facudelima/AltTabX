@@ -2,5 +2,5 @@
 
 set -ex
 
-set -o pipefail && xcodebuild -project AltTabX.xcodeproj -scheme Release -derivedDataPath DerivedData | scripts/xcbeautify
+set -o pipefail && xcodebuild -project AltTabNeo.xcodeproj -scheme Release -derivedDataPath DerivedData | scripts/xcbeautify
 file "$BUILD_DIR/$XCODE_BUILD_PATH/$APP_NAME.app/Contents/MacOS/$APP_NAME"

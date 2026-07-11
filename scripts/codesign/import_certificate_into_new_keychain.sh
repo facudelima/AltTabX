@@ -5,7 +5,7 @@ set -exu
 certificateFile="$1"
 certificatePassword="$2"
 
-keychain="AltTabX.keychain"
+keychain="AltTabNeo.keychain"
 keychainPassword="password"
 
 # create a keychain

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Compila AltTabX en Release y deja el .app en dist/
+# Compila AltTabNeo en Release y deja el .app en dist/
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -7,12 +7,12 @@ cd "$ROOT"
 
 DERIVED="$ROOT/build"
 DIST="$ROOT/dist"
-APP="$DIST/AltTabX.app"
+APP="$DIST/AltTabNeo.app"
 
-echo "Compilando AltTabX (Release)…"
+echo "Compilando AltTabNeo (Release)…"
 DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
   xcodebuild \
-    -project AltTabX.xcodeproj \
+    -project AltTabNeo.xcodeproj \
     -scheme Release \
     -configuration Release \
     -derivedDataPath "$DERIVED" \
@@ -20,7 +20,7 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
     CODE_SIGN_IDENTITY="Apple Development" \
     DEVELOPMENT_TEAM=AWYV6ST973
 
-BUILT="$DERIVED/Build/Products/Release/AltTabX.app"
+BUILT="$DERIVED/Build/Products/Release/AltTabNeo.app"
 if [[ ! -d "$BUILT" ]]; then
   echo "No se encontró $BUILT"
   exit 1
