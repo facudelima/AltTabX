@@ -59,7 +59,7 @@ class PermissionsWindow: NSWindow {
             "In System Settings, enable this exact app (not “AltTab” from another install). After toggling the permission, restart the app:",
             comment: "Permissions window path hint"
         ) + "\n" + Bundle.main.bundlePath
-        let restartButton = Button(NSLocalizedString("Restart AltTabX", comment: "After granting accessibility")) { _ in App.restart() }
+        let restartButton = Button(NSLocalizedString("Restart AltTabNeo", comment: "After granting accessibility")) { _ in App.restart() }
         let restartRow = NSStackView(views: [restartButton])
         restartRow.translatesAutoresizingMaskIntoConstraints = false
         restartRow.alignment = .leading

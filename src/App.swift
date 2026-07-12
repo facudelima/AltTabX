@@ -8,12 +8,12 @@ class App: AppCenterApplication {
     /// periphery:ignore
     static let activity = ProcessInfo.processInfo.beginActivity(options: .userInitiatedAllowingIdleSystemSleep,
         reason: "Prevent App Nap to preserve responsiveness")
-    static let bundleIdentifier = Bundle.main.bundleIdentifier ?? "com.alttabx.app"
+    static let bundleIdentifier = Bundle.main.bundleIdentifier ?? "com.alttabneo.app"
     static let bundleURL = Bundle.main.bundleURL
-    static let name = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "AltTabX"
+    static let name = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "AltTabNeo"
     static let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
-    static let licence = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as? String ?? AltTabXBranding.copyright
-    static let repository = AltTabXBranding.repository ?? ""
+    static let licence = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as? String ?? AltTabNeoBranding.copyright
+    static let repository = AltTabNeoBranding.repository ?? ""
     static let appIconReps = CGImage.allNamed("app.icns")
 
     static func appIcon(for size: NSSize) -> CGImage {
@@ -110,8 +110,8 @@ class App: AppCenterApplication {
     }
 
     @objc static func supportProject() {
-        guard AltTabXBranding.supportProjectEnabled,
-              let url = AltTabXBranding.website.flatMap({ URL(string: $0) }) else { return }
+        guard AltTabNeoBranding.supportProjectEnabled,
+              let url = AltTabNeoBranding.website.flatMap({ URL(string: $0) }) else { return }
         NSWorkspace.shared.open(url)
     }
 
@@ -209,7 +209,7 @@ class App: AppCenterApplication {
     /// "now" for the Welcome prompt. Kept narrow on purpose: the other Day-X prompts are gated by
     /// trial age and don't fire on the very first launch.
     private static func willShowDay1WelcomeOnAppLaunch() -> Bool {
-        if AltTabXFreeMode.enabled { return false }
+        if AltTabNeoFreeMode.enabled { return false }
         if case .pro = LicenseManager.shared.state { return false }
         return !ProTransitionManager.shared.hasSeenWelcome
     }
@@ -412,7 +412,7 @@ class App: AppCenterApplication {
         CursorEvents.observe()
         TrackpadEvents.observe()
         CliEvents.observe()
-        if AltTabXBranding.autoUpdateEnabled {
+        if AltTabNeoBranding.autoUpdateEnabled {
             App.sparkleDelegate = SparkleDelegate()
             App.updaterController = SPUStandardUpdaterController(
                 startingUpdater: false,
@@ -444,7 +444,7 @@ class App: AppCenterApplication {
 
 extension App: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        if AltTabXBranding.telemetryEnabled {
+        if AltTabNeoBranding.telemetryEnabled {
             App.appCenterDelegate = AppCenterCrash()
         }
         App.shared.disableRelaunchOnLogin()

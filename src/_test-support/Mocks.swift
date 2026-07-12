@@ -130,7 +130,7 @@ class App {
         var tilesPanel = TilesPanelMock()
     }
     static let app = AppMock()
-    static let bundleIdentifier = "com.alttabx.app"
+    static let bundleIdentifier = "com.alttabneo.app"
 }
 
 class TilesPanel {

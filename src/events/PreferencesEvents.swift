@@ -59,7 +59,7 @@ class PreferencesEvents {
             }
             return
         }
-        if !AltTabXFreeMode.enabled && LicenseManager.shared.isProLocked && ProFeature.isStoredValuePro(preferenceKey: key) {
+        if !AltTabNeoFreeMode.enabled && LicenseManager.shared.isProLocked && ProFeature.isStoredValuePro(preferenceKey: key) {
             UpgradeTab.navigateToUpgradeTab()
         }
         ControlsTab.preferenceChanged(key)
