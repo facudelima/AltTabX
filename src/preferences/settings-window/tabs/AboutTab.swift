@@ -72,22 +72,16 @@ class AboutTab {
 class AboutWindow: NSPanel {
     private static let contentPadding = CGFloat(24)
     static var shared: AboutWindow?
-    private var usageTextView: NSTextView!
 
     static var canBecomeKey_ = true
     override var canBecomeKey: Bool { Self.canBecomeKey_ }
 
     convenience init() {
-        self.init(contentRect: NSRect(x: 0, y: 0, width: 380, height: 450), styleMask: [.titled, .closable, .fullSizeContentView], backing: .buffered, defer: false)
+        self.init(contentRect: NSRect(x: 0, y: 0, width: 380, height: 220), styleMask: [.titled, .closable, .fullSizeContentView], backing: .buffered, defer: false)
         setupWindow()
         setupView()
         setFrameAutosaveNameSafely("AboutWindow2")
         Self.shared = self
-    }
-
-    override func makeKeyAndOrderFront(_ sender: Any?) {
-        updateUsageStats()
-        super.makeKeyAndOrderFront(sender)
     }
 
     private func setupWindow() {
@@ -99,69 +93,18 @@ class AboutWindow: NSPanel {
     }
 
     private func setupView() {
-        let scrollView = NSScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.drawsBackground = false
-        scrollView.hasVerticalScroller = true
-        scrollView.hasHorizontalScroller = false
-        scrollView.scrollerStyle = .overlay
-        let documentView = FlippedView(frame: .zero)
-        documentView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.documentView = documentView
-        let stack = NSStackView()
-        stack.orientation = .vertical
-        stack.alignment = .leading
-        stack.spacing = 30
-        stack.translatesAutoresizingMaskIntoConstraints = false
         let aboutView = AboutTab.makeContentView(false, false, true)
-        let columnWidth = frame.width - 2 * Self.contentPadding
-        usageTextView = Self.makeUsageTextView(columnWidth)
-        let acknowledgmentsView = AcknowledgmentsTab.makeContentView(columnWidth: columnWidth, shouldFit: false, verticallyStacked: true)
-        acknowledgmentsView.translatesAutoresizingMaskIntoConstraints = false
-        stack.addArrangedSubview(aboutView)
-        stack.addArrangedSubview(usageTextView)
-        stack.addArrangedSubview(acknowledgmentsView)
-        stack.setCustomSpacing(15, after: usageTextView)
-        documentView.addSubview(stack)
-        contentView = scrollView
+        aboutView.translatesAutoresizingMaskIntoConstraints = false
+        let container = FlippedView(frame: .zero)
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(aboutView)
+        contentView = container
         NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: documentView.topAnchor, constant: Self.contentPadding),
-            stack.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: Self.contentPadding),
-            stack.trailingAnchor.constraint(equalTo: documentView.trailingAnchor, constant: -Self.contentPadding),
-            stack.bottomAnchor.constraint(equalTo: documentView.bottomAnchor, constant: -Self.contentPadding),
-            documentView.widthAnchor.constraint(equalTo: scrollView.contentView.widthAnchor),
-            aboutView.leadingAnchor.constraint(equalTo: stack.leadingAnchor),
-            aboutView.trailingAnchor.constraint(equalTo: stack.trailingAnchor),
-            usageTextView.leadingAnchor.constraint(equalTo: stack.leadingAnchor),
-            usageTextView.trailingAnchor.constraint(equalTo: stack.trailingAnchor),
-            acknowledgmentsView.leadingAnchor.constraint(equalTo: stack.leadingAnchor),
-            acknowledgmentsView.trailingAnchor.constraint(equalTo: stack.trailingAnchor),
+            aboutView.topAnchor.constraint(equalTo: container.topAnchor, constant: Self.contentPadding),
+            aboutView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: Self.contentPadding),
+            aboutView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -Self.contentPadding),
+            aboutView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -Self.contentPadding),
         ])
-    }
-
-    private static func makeUsageTextView(_ columnWidth: CGFloat) -> NSTextView {
-        let textView = NSTextView()
-        textView.textContainer!.widthTracksTextView = true
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.drawsBackground = false
-        textView.isSelectable = true
-        textView.isEditable = false
-        textView.enabledTextCheckingTypes = 0
-        textView.frame.size.width = columnWidth
-        return textView
-    }
-
-    private func updateUsageStats() {
-        let now = Date()
-        let weekCount = UsageStats.count("triggers", since: now.addingTimeInterval(-7 * 24 * 3600))
-        let monthCount = UsageStats.count("triggers", since: now.addingTimeInterval(-30 * 24 * 3600))
-        let yearCount = UsageStats.count("triggers", since: now.addingTimeInterval(-365 * 24 * 3600))
-        let markdown = "## \(NSLocalizedString("Usage", comment: ""))\n\nYou have used \(App.name):\n\u{2022} **\(weekCount)** times in the past week\n\u{2022} **\(monthCount)** times in the past month\n\u{2022} **\(yearCount)** times in the past year"
-        usageTextView.textStorage!.setAttributedString(Markdown.toAttributedString(markdown))
-        usageTextView.layoutManager!.ensureLayout(for: usageTextView.textContainer!)
-        let usedRect = usageTextView.layoutManager!.usedRect(for: usageTextView.textContainer!)
-        usageTextView.invalidateIntrinsicContentSize()
-        usageTextView.fit(usedRect.width, usedRect.height)
     }
 
     override func close() {

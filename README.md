@@ -20,7 +20,7 @@ Switcher de ventanas para macOS, con vista previa de miniaturas y atajos persona
 
 ### Desde release (recomendado)
 
-1. Descargá `AltTabX-1.0.0.dmg` o `AltTabX-1.0.0.zip` desde [Releases](https://github.com/facudelima/AltTabX/releases).
+1. Descargá `AltTabX-1.0.1.dmg` o `AltTabX-1.0.1.zip` desde [Releases](https://github.com/facudelima/AltTabX/releases).
 2. Arrastrá **AltTabX** a **Aplicaciones**.
 3. Abrí la app y concedé Accesibilidad en Ajustes del Sistema.
 
