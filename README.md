@@ -1,4 +1,4 @@
-# AltTabNeo
+# AltTabNeo - Totalmente gratis
 
 Switcher de ventanas para macOS, con vista previa de miniaturas y atajos personalizables.
 
